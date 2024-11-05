@@ -25,4 +25,16 @@ export default class ServiceSeries {
       });
     });
   }
+
+  findPersonajes(id) {
+    return new Promise(function (resolve) {
+      let request = "api/series/personajesserie/" + id;
+      let url = Global.urlApiSeries + request;
+      let personajes = {};
+      axios.get(url).then((response) => {
+        personajes = response.data;
+        resolve(personajes);
+      });
+    });
+  }
 }

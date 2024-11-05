@@ -45,10 +45,10 @@
               >
                 Series
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-dark">
                 <li v-for="s in series" :key="s">
                   <router-link
-                    class="dropdown-item text-bg-dark"
+                    class="dropdown-item"
                     :to="'/detalles/' + s.idSerie"
                     >{{ s.nombre }}</router-link
                   >
