@@ -13,4 +13,16 @@ export default class ServiceSeries {
       });
     });
   }
+
+  findSerie(id) {
+    return new Promise(function (resolve) {
+      let request = "api/series/" + id;
+      let url = Global.urlApiSeries + request;
+      let serie = {};
+      axios.get(url).then((response) => {
+        serie = response.data;
+        resolve(serie);
+      });
+    });
+  }
 }

@@ -47,9 +47,11 @@
               </a>
               <ul class="dropdown-menu">
                 <li v-for="s in series" :key="s">
-                  <router-link class="dropdown-item" :to="'/ejemplo'">{{
-                    s.nombre
-                  }}</router-link>
+                  <router-link
+                    class="dropdown-item text-bg-dark"
+                    :to="'/detalles/' + s.idSerie"
+                    >{{ s.nombre }}</router-link
+                  >
                 </li>
               </ul>
             </li>
