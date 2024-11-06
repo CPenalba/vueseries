@@ -5,7 +5,7 @@
     <form>
       <label>Serie</label>
       <br />
-      <select class="form-select">
+      <select class="form-select" @change="mostrarSerie" v-model="idSerie">
         <option v-for="s in series" :key="s" :value="s.idSerie">
           {{ s.nombre }}
         </option>
@@ -13,7 +13,11 @@
       <br />
       <label>Personaje</label>
       <br />
-      <select class="form-select">
+      <select
+        class="form-select"
+        @change="mostrarPersonaje"
+        v-model="idPersonaje"
+      >
         <option v-for="p in personajes" :key="p" :value="p.idPersonaje">
           {{ p.nombre }}
         </option>
@@ -21,6 +25,19 @@
       <br />
       <button class="btn btn-success">Modificar personaje</button>
     </form>
+
+    <div class="containerr">
+      <div v-if="serie">
+        <h2>{{ serie.nombre }}</h2>
+        <hr />
+        <img :src="serie.imagen" width="400px" height="400px" />
+      </div>
+      <div v-if="personaje">
+        <h2>{{ personaje.nombre }}</h2>
+        <hr />
+        <img :src="personaje.imagen" width="400px" height="400px" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,17 +51,45 @@ export default {
     return {
       series: [],
       personajes: [],
+      idSerie: 0,
+      idPersonaje: 0,
+      serie: null,
+      personaje: null,
     };
   },
   mounted() {
     service.loadSeries().then((result) => {
       this.series = result;
+      if (this.series.length > 0) {
+        this.idSerie = this.series[0].idSerie;
+      }
     });
     service.loadPersonajes().then((result) => {
       this.personajes = result;
+      if (this.personajes.length > 0) {
+        this.idPersonaje = this.personajes[0].idPersonaje;
+      }
     });
+  },
+  methods: {
+    mostrarSerie() {
+      service.findSerie(this.idSerie).then((result) => {
+        this.serie = result;
+      });
+    },
+    mostrarPersonaje() {
+      service.findPersonaje(this.idPersonaje).then((result) => {
+        this.personaje = result;
+      });
+    },
   },
 };
 </script>
 
-<style></style>
+<style>
+.containerr {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+</style>
