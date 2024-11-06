@@ -20,6 +20,7 @@
           <th>Nombre</th>
           <th>Imagen</th>
           <th>Id serie</th>
+          <th>Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,14 @@
             <img :src="per.imagen" width="150px" height="150px" />
           </td>
           <td>{{ per.idSerie }}</td>
+          <td>
+            <button
+              @click="deletePersonaje(per.idPersonaje)"
+              class="btn btn-danger"
+            >
+              Eliminar
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -49,11 +58,22 @@ export default {
     };
   },
   mounted() {
-    let id = this.$route.params.id;
-    service.findPersonajes(id).then((result) => {
-      this.status = true;
-      this.personajes = result;
-    });
+    this.findPersonajes();
+  },
+  methods: {
+    findPersonajes() {
+      let id = this.$route.params.id;
+      service.findPersonajes(id).then((result) => {
+        this.status = true;
+        this.personajes = result;
+      });
+    },
+    deletePersonaje(idPersonaje) {
+      service.deletePersonaje(idPersonaje).then((result) => {
+        console.log(result);
+        this.findPersonajes();
+      });
+    },
   },
 };
 </script>

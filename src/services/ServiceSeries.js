@@ -81,4 +81,14 @@ export default class ServiceSeries {
       });
     });
   }
+
+  deletePersonaje(id) {
+    return new Promise(function (resolve) {
+      var request = "api/personajes/" + id;
+      var url = Global.urlApiSeries + request;
+      axios.delete(url).then((response) => {
+        resolve(response);
+      });
+    });
+  }
 }
