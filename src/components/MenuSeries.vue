@@ -27,7 +27,7 @@
               <router-link class="nav-link active" to="/"> Home </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="">
+              <router-link class="nav-link" to="/crear">
                 Nuevo personaje
               </router-link>
             </li>
