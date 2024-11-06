@@ -2,7 +2,7 @@
   <div>
     <h1>Modificar personaje</h1>
     <hr />
-    <form>
+    <form v-on:submit.prevent="updatePersonaje()">
       <label>Serie</label>
       <br />
       <select class="form-select" @change="mostrarSerie" v-model="idSerie">
@@ -81,6 +81,14 @@ export default {
       service.findPersonaje(this.idPersonaje).then((result) => {
         this.personaje = result;
       });
+    },
+    updatePersonaje() {
+      service
+        .modificarPersonaje(this.idPersonaje, this.idSerie)
+        .then((result) => {
+          console.log(result);
+          this.$router.push("/buscarpers/" + this.idSerie);
+        });
     },
   },
 };
