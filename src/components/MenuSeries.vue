@@ -32,7 +32,7 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to=""
+              <router-link class="nav-link" to="/modificar"
                 >Modificar personajes</router-link
               >
             </li>
