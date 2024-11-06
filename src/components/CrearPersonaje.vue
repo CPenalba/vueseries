@@ -54,13 +54,17 @@ export default {
   methods: {
     insertPersonaje() {
       service.crearPersonaje(this.personaje).then(() => {
-        this.$router.push(`/buscarpers/${this.personaje.idSerie}`);
+        this.$router.push("/buscarpers/" + this.personaje.idSerie);
       });
     },
   },
   mounted() {
     service.loadSeries().then((result) => {
       this.series = result;
+      //para que aparezca el campo del select lleno al cargar la pagina
+      if (this.series.length > 0) {
+        this.personaje.idSerie = this.series[0].idSerie;
+      }
     });
   },
 };
